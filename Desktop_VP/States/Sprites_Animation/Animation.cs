@@ -1,31 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Diagnostics;
+﻿using Microsoft.Xna.Framework;
+
 
 namespace Desktop_VP
 {
-    static class Animation
+    class Animation
     {
-        static private float Time;
-        static private int Frame;
+        private float Time;
+        public float time { get { return Time; } set { Time = value; } }
+        private int Frame;
+        private bool Loop, Back;
 
-        static public int Animate(Rectangle[] Source,float Time_R) {
-            var length = Source.Length - 1;
+        /// <summary>
+        /// <para>Flips thorugh Rect array</para>
+        /// </summary>
+        /// <param name="Source"></param>
+        /// <param name="Time_R"></param>
+        /// <returns>Frame</returns>
+        public int Animate(Rectangle[] Source,float _Time_R,bool _Loop) {
+            
             Time--;
-            //Debug.WriteLine(Time);
-            //Debug.WriteLine(Frame);
-            if (Time <= 0 && Frame < length) { Time = Time_R; return Frame++; }
-            else if (Time <= 0 && Frame == length) { Time = Time_R; Frame = 0;return Frame; }
-            else { return Frame; }
+            if (Time <= 0) {
+                An(Source, _Time_R, _Loop);
+            }          
+            return Frame;
             
         }
 
-        static public void Set_Time(float _Time) {
-            Time = _Time;
+        public void An(Rectangle[] Source,float Time_R,bool _Loop)
+        {
+            //To prevent array Overload
+            var length = Source.Length; 
+            
+
+            //If not at the end of array...
+            ////Add Frame
+            if (Frame < length && !Back) { Time = Time_R;  Frame++; }
+            //Subrtact Frame
+            else if (Frame > 0 && Back) { Time = Time_R;  Frame--; }
+
+            if (Frame == length - 1 && _Loop || Frame == 0 && _Loop)
+            {
+                if (Back) { Back = false; }
+                else { Back = true; }
+            }
+            else if(Frame == length  && !_Loop) { Frame = 0; }
         }
     }
 }

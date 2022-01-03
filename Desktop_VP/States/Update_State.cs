@@ -8,18 +8,20 @@ using System.Diagnostics;
 namespace Desktop_VP
 {
     
-    static class Updates
-    {
-        
-        static public void Step(GameTime gametime) {
+    static class Update_State
+    {   
+        static public void Step(GameTime gametime,GraphicsDeviceManager _graphics) {
             var delta = (float)gametime.ElapsedGameTime.TotalSeconds;
 
+            //Screen
+            if (Keyboard.GetState().IsKeyDown(Keys.F1) && !Set_State.fullscreen) { Set_State.fullscreen = true; _graphics.ToggleFullScreen(); }
+            else if (Keyboard.GetState().IsKeyUp(Keys.F1) && Set_State.fullscreen){ Set_State.fullscreen = false; }
 
             //Mouse
             if (Collision.Mouse_Check(Set_State.mon.Get_X(),Set_State.mon.Get_Y(), Set_State.mon.Get_W(),Set_State.mon.Get_H())) {
                 Debug.WriteLine("True"); 
             }
-            else { Debug.WriteLine("False"); }
+            //else { Debug.WriteLine("False"); }
         }
         
 }

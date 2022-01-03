@@ -1,31 +1,45 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Desktop_VP
 {
-    class Sprite_Slice
+    static class Sprite_Slice
     {
-        public int Times = 5;
-        public int width = -60;
-        public int Height = 0;
-        public int Size_x  = 60;
-        public int Size_y  = 64;
-
-        public void Math_Slice()
+        static private int Total_Sprites, Width, Height, Size_x, Size_y;
+        
+        /// <summary>
+        /// <para>Creates Rec values and stores it in an array</para>
+        /// </summary>
+        static private void Math_Slice()
         {
-            if(width < Size_x * 4)
+            if(Width < Size_x * Total_Sprites)
             {
-                width += Size_x;
+                Width += Size_x;
             }
             else
-            {width = 0; Height += Size_y; }
+            {Width = 0; Height += Size_y; }
         }
-        public Rectangle Slice(Rectangle Source)
+
+        static public void Set(int _width, int _height,int _size_x,int _size_y,int _times)
+        {
+            Width = _width;
+            Height = _height;
+            Size_x = _size_x;
+            Size_y = _size_y;
+            Total_Sprites = _times;
+        }
+
+        /// <summary>
+        /// <para>Creates Rec to store in arrays</para>
+        /// </summary>
+        /// <param name="Source"></param>
+        /// <returns>Rectangle(Width,Height,X,Y)</returns>
+        static public Rectangle Slice(Rectangle Source)
         {
             Math_Slice();
-            return new Rectangle(width, Height, Size_x, Size_y);
+            return new Rectangle(Width, Height, Size_x, Size_y);
         }
+
+
 
 
 

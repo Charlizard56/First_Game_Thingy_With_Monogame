@@ -9,10 +9,6 @@ namespace Desktop_VP
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         
-        private Texture2D T_Egg;
-        private Rectangle[] Source_Rec = new Rectangle[3];       
-        private Sprite_Slice S_Slice = new Sprite_Slice();
-        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -20,12 +16,19 @@ namespace Desktop_VP
             IsMouseVisible = true;
 
             //Slice
-            for (int i = 0; i < Source_Rec.Length; i++) {
-                Source_Rec[i] = S_Slice.Slice(Source_Rec[i]);
+            Sprite_Slice.Set(-60, 0, 60, 64, 3);
+            for (int i = 0; i < Set_State.source_rec.Length; i++) {
+                Set_State.source_rec[i] = Sprite_Slice.Slice(Set_State.source_rec[i]); 
             }
-            
-            //Set Animation Time
-            Animation.Set_Time(100);
+            Sprite_Slice.Set(-34, 0, 34, 44, 10);
+            for (int b = 0; b < Set_State.source_rec_bunny.Length; b++) {
+                Set_State.source_rec_bunny[b] = Sprite_Slice.Slice(Set_State.source_rec_bunny[b]);
+            }
+
+            //Set Animation
+            Set_State.An_3_Frames.time = 80;
+            Set_State.An_6_Framse.time = 8;
+
         }
 
         protected override void Initialize()
@@ -36,9 +39,9 @@ namespace Desktop_VP
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            T_Egg = Content.Load<Texture2D>("blue_egg_big_sheet");
+            Set_State.t_egg = Content.Load<Texture2D>("blue_egg_big_sheet");
+            Set_State.t_bunny = Content.Load<Texture2D>("Idle (34x44)");
 
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -46,23 +49,16 @@ namespace Desktop_VP
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             
-            Updates.Step(gameTime);
+            Update_State.Step(gameTime,_graphics);
             
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.PowderBlue);
 
-            var m_x = Set_State.mon.Get_X();
-            var m_y = Set_State.mon.Get_Y();
-            var m_w = Set_State.mon.Get_W(); 
-            var m_h = Set_State.mon.Get_H();
-
-            _spriteBatch.Begin(); 
-            _spriteBatch.Draw(T_Egg, new Rectangle(m_x,m_y,m_w-m_x,m_h-m_y), Source_Rec[Animation.Animate(Source_Rec,80)], Color.White);
-            _spriteBatch.End();
+            Draw_State.Step_Draw(_spriteBatch,gameTime);
 
             base.Draw(gameTime);
         }
