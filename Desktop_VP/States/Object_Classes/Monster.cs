@@ -40,6 +40,17 @@ namespace Desktop_VP
         {
             return (int)Monster_Vector2.Y;
         }
+        public void Set_X(float Speed, float Delta)
+        {
+            Monster_Vector2.X += Speed * Delta;
+            Monster_W = new Vector2(Monster_Vector2.X + Sprite_Size, Monster_Vector2.Y);
+        }
+        public void Set_Y(float Speed,float Delta)
+        {
+            Monster_Vector2.Y += Speed * Delta;
+            Monster_H = new Vector2(Monster_Vector2.X, Monster_Vector2.Y + Sprite_Size);
+        }
+
         public int Get_W()
         {
             return (int)Monster_W.X;
