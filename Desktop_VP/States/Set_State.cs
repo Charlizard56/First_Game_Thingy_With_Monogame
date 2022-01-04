@@ -17,7 +17,7 @@ namespace Desktop_VP
         static private string[] Life_State = new string[6] {"Egg","Baby","Child","Teen","Adult","Dead" };
         static public string[] life_state { get { return Life_State; } set { Life_State = value; } }
 
-        //Get Components
+        //Create Components
         static public Animation An_3_Frames = new Animation();
         static public Animation An_6_Framse = new Animation();
 

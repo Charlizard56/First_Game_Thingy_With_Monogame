@@ -19,19 +19,15 @@ namespace Desktop_VP
         public int Animate(Rectangle[] Source,float _Time_R,bool _Loop) {
             try
             {
-
                 Time--;
                 if (Time <= 0)
                 {
                     An(Source, _Time_R, _Loop);
-                }
-                
-            }
-            
+                }               
+            }            
             catch {
                 Debug.WriteLine("Failed to Animate");
             }
-
             return Frame;
         }
 
