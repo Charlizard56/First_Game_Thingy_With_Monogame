@@ -8,7 +8,7 @@ What I have done:
 - Sprite Slicer
 - Animation
 
-What I want to do:
+What I plan to do:
 
 - Collsion with Objects
 - Sound
