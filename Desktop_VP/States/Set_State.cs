@@ -7,22 +7,26 @@ namespace Desktop_VP
     //Start of Game
     static class Set_State
     {
+        #region//Types
         //Int
+
+        //Float
+        static private float Speed = 90f;
+        static public float speed { get { return Speed; }set { Speed = value; } }
 
         //Bool
         static private bool Fullscreen;
         static public bool fullscreen { get { return Fullscreen; } set { Fullscreen = value; } }
-
-        //Strings
-        static private string[] Life_State = new string[6] {"Egg","Baby","Child","Teen","Adult","Dead" };
-        static public string[] life_state { get { return Life_State; } set { Life_State = value; } }
+        static private bool Key_Down = false;
+        static public bool key_down {get { return Key_Down; } set { Key_Down = value; } }
+        #endregion
 
         //Create Components
         static public Animation An_3_Frames = new Animation();
-        static public Animation An_6_Framse = new Animation();
+        static public Animation An_6_Frames = new Animation();
 
         //Objects   
-        static public Monster mon = new Monster("fred", new Vector2(465, 40), new Vector2(0, 0), new Vector2(0, 0), 64,"Egg");
+        static public Player P1 = new Player(new Vector2(32, 40), new Vector2(0, 0), new Vector2(0, 0), 64);
 
         //Textures
         static private Texture2D T_Egg, T_Bunny;
