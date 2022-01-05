@@ -27,7 +27,7 @@ namespace Desktop_VP
 
             //Set Animation
             Set_State.An_3_Frames.time = 80;
-            Set_State.An_6_Framse.time = 8;
+            Set_State.An_6_Frames.time = 8;
 
         }
 

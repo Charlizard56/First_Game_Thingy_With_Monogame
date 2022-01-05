@@ -13,21 +13,33 @@ namespace Desktop_VP
         static public void Step(GameTime gametime, GraphicsDeviceManager _graphics)
         {
             var delta = (float)gametime.ElapsedGameTime.TotalSeconds;
+            var Key = Keyboard.GetState();
 
             //Screen
-            if (Keyboard.GetState().IsKeyDown(Keys.F1) && !Set_State.fullscreen) { Set_State.fullscreen = true; _graphics.ToggleFullScreen(); }
-            else if (Keyboard.GetState().IsKeyUp(Keys.F1) && Set_State.fullscreen) { Set_State.fullscreen = false; }
+            if (Key.IsKeyDown(Keys.F1) && !Set_State.fullscreen) { Set_State.fullscreen = true; _graphics.ToggleFullScreen(); }
+            else if (Key.IsKeyUp(Keys.F1) && Set_State.fullscreen) { Set_State.fullscreen = false; }
 
             //Mouse
-            if (Collision.Mouse_Check(Set_State.mon.Get_X(), Set_State.mon.Get_Y(), Set_State.mon.Get_W(), Set_State.mon.Get_H()))
+            if (Collision.Mouse_Check(Set_State.P1.Get_X(), Set_State.P1.Get_Y(), Set_State.P1.Get_W(), Set_State.P1.Get_H()))
             {
                 Debug.WriteLine("True");
             }
-            //else { Debug.WriteLine("False"); }
-
+            
+            
             //Player Movement
-            //Set_State.mon.Set_X(2,delta);
-            Set_State.mon.Set_Y(4, delta);
+            if (Key.IsKeyDown(Keys.S) && Key.IsKeyUp(Keys.W)){
+                if(Set_State.P1.Get_H() < _graphics.PreferredBackBufferHeight - 4)
+                {
+                    Set_State.P1.Set_Y(Set_State.speed, delta);
+                }               
+            }
+            if (Key.IsKeyDown(Keys.W) && Key.IsKeyUp(Keys.S))
+            {
+                if (Set_State.P1.Get_H() > 0 + Set_State.P1.sprite_size)
+                {
+                    Set_State.P1.Set_Y(-Set_State.speed, delta);
+                }
+            }
 
         }
     }
